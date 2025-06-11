@@ -1,0 +1,18 @@
+{
+  "name": "job-mini-app",
+  "version": "1.0.0",
+  "description": "Telegram Mini App for Job Postings",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000 --bind 0.0.0.0"
+  },
+  "keywords": [
+    "telegram",
+    "mini-app",
+    "jobs",
+    "uzbekistan"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+} 

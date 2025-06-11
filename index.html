@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Ish O'rinlari - Telegram Mini App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <h2>Ish O'rinlari</h2>
+            <p>Yuklanmoqda...</p>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <section id="welcomeSection" class="welcome-section">
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i>
+                    <h1>Ish O'rinlari</h1>
+                </div>
+                <p class="welcome-subtitle">Eng yaxshi ish o'rinlarini toping va joylashtiring</p>
+            </div>
+            
+            <div class="welcome-features">
+                <div class="feature">
+                    <i class="fas fa-search"></i>
+                    <h3>Ishlarni Qidirish</h3>
+                    <p>Minglab ish o'rinlari orasidan o'zingizga mosini toping</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3>Ish Joylashtirish</h3>
+                    <p>O'z ishingizni joylashtiring va ishchilarni toping</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Xavfsizlik</h3>
+                    <p>Barcha ma'lumotlaringiz xavfsiz va maxfiy</p>
+                </div>
+            </div>
+            
+            <div class="welcome-actions">
+                <button class="btn btn-primary" onclick="showSection('loginSection')">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Kirish
+                </button>
+                <button class="btn btn-secondary" onclick="showSection('registerSection')">
+                    <i class="fas fa-user-plus"></i>
+                    Ro'yxatdan o'tish
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="loginSection" class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="back-btn" onclick="showSection('welcomeSection')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Kirish</h2>
+            </div>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginPhone">Telefon raqam</label>
+                    <div class="input-group">
+                        <input type="tel" id="loginPhone" placeholder="+998 90 123 45 67" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Parol</label>
+                    <div class="input-group">
+                        <input type="password" id="loginPassword" placeholder="Parolingizni kiriting" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Kirish
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <a href="#" onclick="showSection('forgotSection')">Parolni unutdingizmi?</a>
+                <a href="#" onclick="showSection('registerSection')">Ro'yxatdan o'tish</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section id="registerSection" class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="back-btn" onclick="showSection('welcomeSection')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Ro'yxatdan o'tish</h2>
+            </div>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">To'liq ism</label>
+                    <div class="input-group">
+                        <input type="text" id="registerName" placeholder="Ismingizni kiriting" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPhone">Telefon raqam</label>
+                    <div class="input-group">
+                        <input type="tel" id="registerPhone" placeholder="+998 90 123 45 67" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Parol</label>
+                    <div class="input-group">
+                        <input type="password" id="registerPassword" placeholder="Parol yarating" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('registerPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Parolni tasdiqlang</label>
+                    <div class="input-group">
+                        <input type="password" id="confirmPassword" placeholder="Parolni qayta kiriting" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-user-plus"></i>
+                    Ro'yxatdan o'tish
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <a href="#" onclick="showSection('loginSection')">Allaqachon hisobingiz bormi?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forgot Password Section -->
+    <section id="forgotSection" class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="back-btn" onclick="showSection('loginSection')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Parolni tiklash</h2>
+            </div>
+            
+            <form id="forgotForm" class="auth-form">
+                <div class="form-group">
+                    <label for="forgotPhone">Telefon raqam</label>
+                    <div class="input-group">
+                        <input type="tel" id="forgotPhone" placeholder="+998 90 123 45 67" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i>
+                    Tasdiqlash kodini yuborish
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <a href="#" onclick="showSection('loginSection')">Kirish sahifasiga qaytish</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reset Password Section -->
+    <section id="resetSection" class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="back-btn" onclick="showSection('forgotSection')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2>Yangi parol</h2>
+            </div>
+            
+            <form id="resetForm" class="auth-form">
+                <div class="form-group">
+                    <label for="resetCode">Tasdiqlash kodi</label>
+                    <div class="input-group">
+                        <input type="text" id="resetCode" placeholder="6 xonali kod" required>
+                        <i class="fas fa-key"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">Yangi parol</label>
+                    <div class="input-group">
+                        <input type="password" id="newPassword" placeholder="Yangi parol" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('newPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmNewPassword">Parolni tasdiqlang</label>
+                    <div class="input-group">
+                        <input type="password" id="confirmNewPassword" placeholder="Parolni qayta kiriting" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmNewPassword')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-save"></i>
+                    Parolni saqlash
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3 id="userName">Foydalanuvchi</h3>
+                        <p id="userPhone">+998 90 123 45 67</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon" onclick="showLogoutModal()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Jobs Section -->
+            <section id="jobsSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Ish O'rinlari</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="loadJobs()">
+                            <i class="fas fa-sync-alt"></i>
+                            Yangilash
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="jobGrid" class="job-grid">
+                    <!-- Jobs will be loaded here -->
+                </div>
+            </section>
+
+            <!-- My Jobs Section -->
+            <section id="myJobsSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Mening Ishlarim</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="loadMyJobs()">
+                            <i class="fas fa-sync-alt"></i>
+                            Yangilash
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="myJobGrid" class="job-grid">
+                    <!-- My jobs will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Post Job Section -->
+            <section id="postSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Ish Joylashtirish</h2>
+                </div>
+                
+                <form id="postForm" class="post-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobTitle">Ish nomi *</label>
+                            <input type="text" id="jobTitle" placeholder="Masalan: Sotuvchi" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobCompany">Kompaniya *</label>
+                            <input type="text" id="jobCompany" placeholder="Kompaniya nomi" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobLocation">Manzil *</label>
+                            <input type="text" id="jobLocation" placeholder="Shahar, tuman" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobType">Ish turi *</label>
+                            <select id="jobType" required>
+                                <option value="">Tanlang</option>
+                                <option value="full-time">To'liq kunlik</option>
+                                <option value="part-time">Yarim kunlik</option>
+                                <option value="remote">Uzoqdan</option>
+                                <option value="contract">Shartnoma asosida</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobSalary">Maosh *</label>
+                            <input type="text" id="jobSalary" placeholder="Masalan: 2,000,000 so'm" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobWorkers">Ishchilar soni *</label>
+                            <select id="jobWorkers" required>
+                                <option value="">Tanlang</option>
+                                <option value="1">1 kishi</option>
+                                <option value="2">2 kishi</option>
+                                <option value="3">3 kishi</option>
+                                <option value="4">4 kishi</option>
+                                <option value="5">5 kishi</option>
+                                <option value="6">6+ kishi</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobTelegram">Telegram (ixtiyoriy)</label>
+                            <input type="text" id="jobTelegram" placeholder="@username">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobPhone">Telefon (ixtiyoriy)</label>
+                            <input type="tel" id="jobPhone" placeholder="+998 90 123 45 67">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jobRequirements">Talablar (ixtiyoriy)</label>
+                        <textarea id="jobRequirements" placeholder="Ishchiga qo'yiladigan talablar..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jobDescription">Ish tavsifi *</label>
+                        <textarea id="jobDescription" placeholder="Ish haqida batafsil ma'lumot..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-plus-circle"></i>
+                        Ish Joylashtirish
+                    </button>
+                </form>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profileSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Profil</h2>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <div class="avatar-large" id="profileAvatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info">
+                            <h3 id="profileName">Foydalanuvchi nomi</h3>
+                            <p id="profilePhone">+998 90 123 45 67</p>
+                            <p id="profileDate">Ro'yxatdan o'tgan: 2024-01-01</p>
+                            <div class="profile-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Ishlar</span>
+                                    <span class="stat-value" id="profileJobs">0 ta</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="btn btn-secondary" onclick="showChangePasswordModal()">
+                            <i class="fas fa-key"></i>
+                            Parolni o'zgartirish
+                        </button>
+                        <button class="btn btn-secondary" onclick="showLoginHistoryModal()">
+                            <i class="fas fa-history"></i>
+                            Kirish tarixi
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportUserData()">
+                            <i class="fas fa-download"></i>
+                            Ma'lumotlarni yuklab olish
+                        </button>
+                        <button class="btn btn-danger" onclick="showDeleteAccountModal()">
+                            <i class="fas fa-trash"></i>
+                            Akkauntni o'chirish
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settingsSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Sozlamalar</h2>
+                </div>
+                
+                <div class="settings-content">
+                    <div class="settings-group">
+                        <h3>Umumiy sozlamalar</h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Avtomatik kirish</h4>
+                                <p>Dastur ochilganda avtomatik kirish</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="autoLoginToggle" checked disabled>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Bildirishnomalar</h4>
+                                <p>Yangi ishlar va xabarlar haqida bildirish</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="notificationsToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Qorong'i rejim</h4>
+                                <p>Qorong'i ranglar sxemasi</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h3>Xavfsizlik</h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Ikki bosqichli autentifikatsiya</h4>
+                                <p>Qo'shimcha xavfsizlik uchun</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="twoFactorToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Faollik kuzatish</h4>
+                                <p>Barcha harakatlarni qayd etish</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="activityToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="showSection('jobsSection')">
+                <i class="fas fa-search"></i>
+                <span>Ishlar</span>
+            </div>
+            <div class="nav-item" onclick="showSection('myJobsSection')">
+                <i class="fas fa-briefcase"></i>
+                <span>Mening Ishlarim</span>
+            </div>
+            <div class="nav-item" onclick="showSection('postSection')">
+                <i class="fas fa-plus-circle"></i>
+                <span>Ish Joylashtirish</span>
+            </div>
+            <div class="nav-item" onclick="showSection('profileSection')">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Modals -->
+    
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chiqish</h3>
+                <button class="modal-close" onclick="closeModal('logoutModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Haqiqatan ham tizimdan chiqmoqchimisiz?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('logoutModal')">Bekor qilish</button>
+                <button class="btn btn-danger" onclick="logout()">Chiqish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="deleteAccountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Akkauntni o'chirish</h3>
+                <button class="modal-close" onclick="closeModal('deleteAccountModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4>Ehtiyot bo'ling!</h4>
+                    <p>Bu harakatni qaytarib bo'lmaydi. Barcha ma'lumotlaringiz o'chiriladi.</p>
+                </div>
+                <div class="form-group">
+                    <label for="deleteConfirm">Tasdiqlash uchun "O'CHIRISH" deb yozing</label>
+                    <input type="text" id="deleteConfirm" placeholder="O'CHIRISH">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('deleteAccountModal')">Bekor qilish</button>
+                <button class="btn btn-danger" disabled onclick="deleteAccount()">O'chirish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Parolni o'zgartirish</h3>
+                <button class="modal-close" onclick="closeModal('changePasswordModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Joriy parol</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPasswordChange">Yangi parol</label>
+                        <input type="password" id="newPasswordChange" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPasswordChange">Parolni tasdiqlang</label>
+                        <input type="password" id="confirmPasswordChange" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('changePasswordModal')">Bekor qilish</button>
+                <button class="btn btn-primary" onclick="changePassword()">Saqlash</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login History Modal -->
+    <div id="loginHistoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Kirish tarixi</h3>
+                <button class="modal-close" onclick="closeModal('loginHistoryModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="loginHistoryList" class="history-list">
+                    <!-- History items will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Detail Modal -->
+    <div id="jobDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="jobDetailTitle">Ish nomi</h3>
+                <button class="modal-close" onclick="closeModal('jobDetailModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="jobDetailContent">
+                    <!-- Job details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('jobDetailModal')">Yopish</button>
+                <button class="btn btn-primary" onclick="applyForJob()">
+                    <i class="fas fa-paper-plane"></i>
+                    Ariza topshirish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Job Modal -->
+    <div id="editJobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ishni tahrirlash</h3>
+                <button class="modal-close" onclick="closeModal('editJobModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editJobForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editJobTitle">Ish nomi *</label>
+                            <input type="text" id="editJobTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editJobCompany">Kompaniya *</label>
+                            <input type="text" id="editJobCompany" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editJobLocation">Manzil *</label>
+                            <input type="text" id="editJobLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editJobType">Ish turi *</label>
+                            <select id="editJobType" required>
+                                <option value="full-time">To'liq kunlik</option>
+                                <option value="part-time">Yarim kunlik</option>
+                                <option value="remote">Uzoqdan</option>
+                                <option value="contract">Shartnoma asosida</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editJobSalary">Maosh *</label>
+                            <input type="text" id="editJobSalary" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editJobWorkers">Ishchilar soni *</label>
+                            <select id="editJobWorkers" required>
+                                <option value="1">1 kishi</option>
+                                <option value="2">2 kishi</option>
+                                <option value="3">3 kishi</option>
+                                <option value="4">4 kishi</option>
+                                <option value="5">5 kishi</option>
+                                <option value="6">6+ kishi</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editJobTelegram">Telegram</label>
+                            <input type="text" id="editJobTelegram">
+                        </div>
+                        <div class="form-group">
+                            <label for="editJobPhone">Telefon</label>
+                            <input type="tel" id="editJobPhone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editJobRequirements">Talablar</label>
+                        <textarea id="editJobRequirements"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editJobDescription">Ish tavsifi *</label>
+                        <textarea id="editJobDescription" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('editJobModal')">Bekor qilish</button>
+                <button class="btn btn-primary" onclick="saveJobEdit()">Saqlash</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Job Modal -->
+    <div id="deleteJobModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ishni o'chirish</h3>
+                <button class="modal-close" onclick="closeModal('deleteJobModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4>Ehtiyot bo'ling!</h4>
+                    <p>Bu ishni o'chirishni xohlaysizmi? Bu harakatni qaytarib bo'lmaydi.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('deleteJobModal')">Bekor qilish</button>
+                <button class="btn btn-danger" onclick="confirmDeleteJob()">O'chirish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notificationText">Xabar</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
