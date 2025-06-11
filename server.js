@@ -35,10 +35,27 @@ app.use(limiter);
 // CORS
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
-        ? ['https://your-domain.com'] 
-        : ['http://localhost:3000', 'http://127.0.0.1:3000'],
-    credentials: true
+        ? ['https://telegram-mini-app-olive.vercel.app', 'https://web.telegram.org', 'https://t.me'] 
+        : ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://telegram-mini-app-olive.vercel.app'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
+// Add headers for Telegram Web App
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 
 // Compression
 app.use(compression());
@@ -53,6 +70,144 @@ app.use(express.static(path.join(__dirname, '.'), {
     etag: true,
     lastModified: true
 }));
+
+// In-memory storage for jobs (in production, use a database)
+let jobs = [];
+let users = {};
+
+// API routes for jobs
+app.get('/api/jobs', (req, res) => {
+    res.json({
+        success: true,
+        data: jobs,
+        count: jobs.length
+    });
+});
+
+app.post('/api/jobs', (req, res) => {
+    try {
+        const {
+            title, company, location, type, salary, workers,
+            telegram, phone, requirements, description, postedBy
+        } = req.body;
+
+        if (!title || !company || !location || !type || !salary || !workers || !description || !postedBy) {
+            return res.status(400).json({
+                success: false,
+                message: 'Barcha majburiy maydonlarni to\'ldiring'
+            });
+        }
+
+        const newJob = {
+            id: Date.now(),
+            title: title.trim(),
+            company: company.trim(),
+            location: location.trim(),
+            type: type,
+            salary: salary.trim(),
+            workers: parseInt(workers),
+            telegram: telegram ? telegram.trim() : '',
+            phone: phone ? phone.trim() : '',
+            requirements: requirements ? requirements.trim() : '',
+            description: description.trim(),
+            postedBy: postedBy,
+            postedAt: new Date().toLocaleString('uz-UZ')
+        };
+
+        jobs.unshift(newJob);
+
+        res.json({
+            success: true,
+            message: 'Ish muvaffaqiyatli joylashtirildi',
+            data: newJob
+        });
+    } catch (error) {
+        console.error('Error posting job:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server xatoligi'
+        });
+    }
+});
+
+app.put('/api/jobs/:id', (req, res) => {
+    try {
+        const jobId = parseInt(req.params.id);
+        const jobIndex = jobs.findIndex(job => job.id === jobId);
+        
+        if (jobIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: 'Ish topilmadi'
+            });
+        }
+
+        const {
+            title, company, location, type, salary, workers,
+            telegram, phone, requirements, description
+        } = req.body;
+
+        if (!title || !company || !location || !type || !salary || !workers || !description) {
+            return res.status(400).json({
+                success: false,
+                message: 'Barcha majburiy maydonlarni to\'ldiring'
+            });
+        }
+
+        jobs[jobIndex] = {
+            ...jobs[jobIndex],
+            title: title.trim(),
+            company: company.trim(),
+            location: location.trim(),
+            type: type,
+            salary: salary.trim(),
+            workers: parseInt(workers),
+            telegram: telegram ? telegram.trim() : '',
+            phone: phone ? phone.trim() : '',
+            requirements: requirements ? requirements.trim() : '',
+            description: description.trim()
+        };
+
+        res.json({
+            success: true,
+            message: 'Ish muvaffaqiyatli tahrirlandi',
+            data: jobs[jobIndex]
+        });
+    } catch (error) {
+        console.error('Error updating job:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server xatoligi'
+        });
+    }
+});
+
+app.delete('/api/jobs/:id', (req, res) => {
+    try {
+        const jobId = parseInt(req.params.id);
+        const jobIndex = jobs.findIndex(job => job.id === jobId);
+        
+        if (jobIndex === -1) {
+            return res.status(404).json({
+                success: false,
+                message: 'Ish topilmadi'
+            });
+        }
+
+        jobs.splice(jobIndex, 1);
+
+        res.json({
+            success: true,
+            message: 'Ish muvaffaqiyatli o\'chirildi'
+        });
+    } catch (error) {
+        console.error('Error deleting job:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server xatoligi'
+        });
+    }
+});
 
 // Routes
 app.get('/', (req, res) => {

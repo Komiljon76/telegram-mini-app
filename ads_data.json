@@ -1,0 +1,32 @@
+{
+  "1": {
+    "text": "salom",
+    "sent_at": 1749622802.937877,
+    "sent_by": 5660670674,
+    "recipients": "all_users"
+  },
+  "2": {
+    "text": "salom hammaga",
+    "sent_at": 1749623037.907628,
+    "sent_by": 5660670674,
+    "recipients": "all_users"
+  },
+  "3": {
+    "text": "qale",
+    "sent_at": 1749623088.591433,
+    "sent_by": 5660670674,
+    "recipients": "all_users"
+  },
+  "4": {
+    "text": "yaxshimi",
+    "sent_at": 1749623301.644706,
+    "sent_by": 5660670674,
+    "recipients": "all_users"
+  },
+  "5": {
+    "text": "salom",
+    "sent_at": 1749623537.187863,
+    "sent_by": 5660670674,
+    "recipients": "all_users"
+  }
+}
