@@ -38,19 +38,19 @@
     --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
     --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
     
-    /* Spacing */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
+    /* Spacing - Reduced */
+    --spacing-xs: 0.2rem;
+    --spacing-sm: 0.4rem;
+    --spacing-md: 0.8rem;
+    --spacing-lg: 1.2rem;
+    --spacing-xl: 1.6rem;
+    --spacing-2xl: 2.4rem;
     
     /* Border Radius */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
     
     /* Transitions */
     --transition-fast: 0.2s ease;
@@ -62,9 +62,10 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
     color: var(--text-primary);
-    line-height: 1.6;
+    line-height: 1.5; /* Adjusted line height */
     min-height: 100vh;
     overflow-x: hidden;
+    font-size: 0.9rem; /* Base font size reduced */
 }
 
 /* Loading Screen */
@@ -124,12 +125,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md); /* Reduced padding */
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
 .welcome-content {
-    max-width: 600px;
+    max-width: 480px; /* Reduced max-width for smaller screens */
     width: 100%;
     text-align: center;
     animation: fadeInUp 1s ease;
@@ -226,12 +227,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md); /* Reduced padding */
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
 .auth-container {
-    max-width: 400px;
+    max-width: 480px; /* Reduced max-width for smaller screens */
     width: 100%;
     background: var(--bg-card);
     backdrop-filter: blur(10px);
@@ -270,7 +271,7 @@ body {
 }
 
 .auth-header h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem; /* Adjusted from 1.8rem */
     font-weight: 600;
     flex: 1;
 }
@@ -540,7 +541,7 @@ body {
 }
 
 .section-header h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem; /* Adjusted from 1.8rem */
     font-weight: 600;
     background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -585,7 +586,7 @@ body {
 }
 
 .job-header h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Adjusted from 1.2rem */
     font-weight: 600;
     color: var(--text-primary);
     flex: 1;
@@ -892,7 +893,7 @@ body {
     border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: space-around;
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-sm) var(--spacing-md);
     position: sticky;
     bottom: 0;
     z-index: 100;
@@ -903,7 +904,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-xs);
-    padding: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: var(--transition-fast);
@@ -1214,14 +1215,34 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        font-size: 0.85rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.85rem;
+    }
+
     .welcome-features {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack features on small screens */
     }
-    
-    .welcome-actions {
-        flex-direction: column;
+
+    .welcome-actions .btn {
+        padding: var(--spacing-sm) var(--spacing-md); /* Smaller buttons */
     }
-    
+
     .job-grid {
         grid-template-columns: 1fr;
     }
@@ -1240,8 +1261,8 @@ body {
     }
     
     .modal-content {
+        padding: var(--spacing-md);
         width: 95%;
-        margin: var(--spacing-md);
     }
     
     .modal-footer {
@@ -1279,24 +1300,44 @@ body {
 }
 
 @media (max-width: 480px) {
+    body {
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 0.95rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
     .dashboard-main {
         padding: var(--spacing-md);
     }
     
     .auth-container {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
     }
     
     .post-form {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
     }
     
     .profile-card {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
     }
     
     .settings-group {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
     }
     
     .job-actions {
@@ -1307,6 +1348,16 @@ body {
         flex-direction: column;
         gap: var(--spacing-md);
         text-align: center;
+    }
+
+    .header-content .user-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .header-content .user-avatar {
+        margin-right: 0;
+        margin-bottom: var(--spacing-sm);
     }
 }
 
